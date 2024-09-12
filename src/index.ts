@@ -1,16 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
-import { users } from "./__mocks__";
+import usersRouter from "./routes/users";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-console.log(users);
-
-app.get("/users", (_, res) => {
-  res.send(users);
-});
+app.use(express.json()); 
+app.use('/api/users', usersRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
